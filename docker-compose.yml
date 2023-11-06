@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+
+  wilpsocialmedia.user:
+    image: ${DOCKER_REGISTRY-}wilpsocialmediauser
+    build:
+      context: .
+      dockerfile: WilpSocialMedia.User/Dockerfile
+    depends_on:
+      - sql.userdata
+
+  sql.userdata:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "5435:1433" 

@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+
+  wilpsocialmedia.user:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://*:80
+      - ConnectionString=server=sql.userdata;Initial Catalog=WilpSocialMedia_User;User ID=sa;Password=Pass@word;
+    ports:
+      - "5101:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+    networks:
+      - my-app 
+  
+  sql.userdata:
+    networks:
+      - my-app 
+ 
+networks:
+  my-app:
+    name: mynetwork
+    external: true
